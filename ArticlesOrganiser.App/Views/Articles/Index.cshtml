@@ -1,0 +1,68 @@
+﻿@model ArticlesOrganiser.Contracts.ArticleViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<a asp-area="" asp-controller="Articles" asp-action="Create" class="btn btn-primary my-2 float-md-right">Add Article</a>
+<table class="table">
+    <thead>
+        <tr>
+            @*<th>Id</th>*@
+            <th>Title or article pdf </th>
+            <th>Article source url</th>
+            @*<th>Collection Created</th>*@
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="mx-auto">
+            @if (Model.ResultsType == ArticlesOrganiser.Contracts.ResultsType.Search)
+            {
+        <td class="py-md-3">
+            <a class="py-4 stretched-link" asp-controller="Articles" asp-action="Index">Clear</a>
+        </td>            }
+            <td>
+                <form class="form" method="get" asp-controller="Articles" asp-action="Index">
+                    <div class="input-group mb-3">
+                        <input type="text" name="title" class="form-control" placeholder="Title" aria-label="Title" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+                        </div>
+                    </div>
+                </form>
+            </td>
+
+        </tr>
+        @foreach (ArticlesOrganiser.Contracts.Article row in @Model.Articles)
+        {
+    <tr>
+        @*<td>@row.Id</td>*@
+        @if (@row.Title.Contains("https") || @row.Title.Contains("http"))
+        {
+
+            <td><a href="@row.Title">@row.Title</a></td>
+
+        }
+        else
+        {
+            <td>@row.Title</td>
+        }
+
+        @*<td><a>@row.Url</a></td>*@
+        <td><a href="@row.Url">@row.Url"</a></td>
+
+        @*<td><input class="form-control" type="checkbox" asp-for="@row.createCollection" disabled></td>*@
+        <td><button class="btn btn-success" asp-area="" asp-controller="Articles" asp-action="Edit" asp-route-articleId="@row.Id">Edit</button></td>
+        <td><button class="btn btn-danger" asp-area="" asp-controller="Articles" asp-action="Delete" asp-route-articleId="@row.Id">Delete</button></td>
+    </tr>
+        }
+        @if (Model == null || Model.Articles.Count() == 0)
+        {
+            <tr>
+                <td colspan="6">No records found.</td>
+            </tr>
+        }
+    </tbody>
+</table>

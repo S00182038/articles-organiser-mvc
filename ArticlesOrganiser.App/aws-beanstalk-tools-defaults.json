@@ -1,0 +1,20 @@
+
+{
+    "region" : "eu-west-1",
+    "configuration" : "Debug",
+    "framework"     : "netcoreapp3.1",
+    "self-contained" : false,
+    "application"    : "ArticlesOrganiser",
+    "environment"    : "ArticlesOrganiser-dev",
+    "enable-xray"    : false,
+    "enhanced-health-type" : "basic",
+    "additional-options"   : "\"aws:autoscaling:launchconfiguration,SecurityGroups\"=\"sg-0c339073\";\"aws:ec2:vpc,Subnets\"=\"subnet-02be2e64\"",
+    "solution-stack"       : "64bit Amazon Linux 2 v2.1.5 running .NET Core",
+    "environment-type"     : "SingleInstance",
+    "cname"                : "articlesorganiser-dev",
+    "instance-type"        : "t3a.medium",
+    "key-pair"             : "articlesmvckey",
+    "instance-profile"     : "aws-elasticbeanstalk-ArticlesOrganiser-dev-0",
+    "service-role"         : "aws-elasticbeanstalk-service-role",
+    "proxy-server"         : "nginx"
+}
